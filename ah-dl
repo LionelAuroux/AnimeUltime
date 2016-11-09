@@ -8,7 +8,8 @@ from time import sleep
 import subprocess
 
 base_url = "http://www.anime-ultime.net/"
-prx = {'http': 'http://127.0.0.1:8080'}
+prx = None
+#prx = {'http': 'http://127.0.0.1:8080'}
 
 def json_head(ref):
     return {'X-Requested-With': "XMLHttpRequest", 'Referer': ref,
@@ -46,6 +47,7 @@ if __name__ == "__main__":
             if m is not None:
                 id_to_dl = int(m.group(1).strip())
         # download this ID
+        print(id_to_dl)
         dlpage = post_page(browser, base_url + 'ddl/authorized_download.php', "idfile=%d&type=hq" % id_to_dl, base_url + link)
         data = dlpage.json()
         # first sleep
